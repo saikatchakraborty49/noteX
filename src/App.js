@@ -13,6 +13,7 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<NewNote/>}/>
+          <Route path="/new-note" element={<NewNote/>}/>
           <Route path="/notes" element={<Notes/>}/>
         </Routes>
       </div>
