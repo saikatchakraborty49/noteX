@@ -42,7 +42,6 @@ function App() {
       dispatch(log(true));
       isLogin = true;
     } catch (error) {
-      console.log(error);
       dispatch(log(false));
       isLogin = false;
     }
