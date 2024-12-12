@@ -2,13 +2,18 @@ import React from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {add,remove} from '../features/counter/noteSlice'
+import {update} from '../features/counter/userSlice'
 import toast from 'react-hot-toast';
+import axios from 'axios';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 
 const NewNote = () => {
   const dispatch=useDispatch();
-  const {note}=useSelector((state)=>state);
-  console.log(note);
+  const {user}=useSelector((state)=>state);
+  const BASE_URL='http://localhost:3000';
+  
 
   const [formData,setFormData]=useState({name:"",content:"",})
     function changeHandler(event) {
@@ -20,29 +25,38 @@ const NewNote = () => {
             }
         })
     }
-    function submitHandler(event) {
+    async function submitHandler(event) {
       if(formData.name==="" || formData.content===""){
         // event.preventDefault();
         // toast.error("Fill all required fields");
-        // console.log("aa gaya if me")
       }
       else{
-        dispatch(add(formData));
         event.preventDefault();
-        toast.success("Note added successfully");
-        console.log(note);
+        try{
+          const response=await axios.post(`${BASE_URL}/api/v1/add-note`, formData,
+            {withCredentials: true,});
+          toast.success(response.data.message || 'Note added successfully');
+          // console.log(response);
+          const userProfile=response.data.data;
+          console.log(userProfile);
+          dispatch(update(userProfile));
+        }catch(error){
+          toast.error(error.response?.data?.message || "Note was not added due to some error")
+        }
       }
     }
   return (
     <div>
-        <form className='flex justify-center flex-col'>
-            <label for="name">Note name</label>
-            <input className='border-2' id="name" name="name" onChange={changeHandler} value={formData.name} required/>
-            <br></br>
-            <label for="content">Note</label>
-            <textarea className='border-2' id="content" name="content" onChange={changeHandler} value={formData.content} rows="5" cols="50" style={{ width: 'auto' }} required/>
-            <br></br>
-            <button className='border-2 bg-green-500 rounded-b-lg py-2' onClick={submitHandler}>Add Note</button>
+        <form className='bg-black/[.6] flex justify-center flex-col p-6 rounded-b-sm shadow-md w-full text-white'>         
+          <label className="block mb-1 font-medium" for="name">Note name</label>
+          <input className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+ placeholder="Note name" id="name" name="name" onChange={changeHandler} value={formData.name} required/>
+          <br></br>
+          <label className="block mb-1 font-medium" for="content">Note</label>
+          <textarea className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+ placeholder="Note content" id="content" name="content" onChange={changeHandler} value={formData.content} rows="5" cols="50" style={{ width: 'auto' }} required/>
+          <br></br>
+          <button className='text-black border-2 bg-green-500 rounded-lg py-2' onClick={submitHandler}>Add Note</button>
         </form>
     </div>
   )

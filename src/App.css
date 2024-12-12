@@ -1,1 +1,9 @@
 /* write your css here */
+.App {
+    background-image: url('./image/notepad-3297994_1280.jpg');
+    background-size: cover;  /* Ensure the background image covers the entire page */
+    background-position: center;  /* Center the background image */
+    background-repeat: repeat;  /* Prevent the background from repeating */
+    min-height: 100vh;  /* Ensure it takes at least the full height of the screen */
+    width: 100%;  /* Ensure the width covers the full screen */
+  }
