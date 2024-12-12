@@ -13,7 +13,7 @@ const Notes = () => {
     const {user}=useSelector((state)=>state);
     const note=user.notes||[];
     console.log(user);
-    const BASE_URL='http://localhost:3000';
+    const BASE_URL='https://notex-backend-0j9r.onrender.com/';
 
 
     return(
