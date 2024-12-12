@@ -22,20 +22,45 @@ function App() {
   let isLogin=useSelector((state)=>state.login.isLogin);
   // let isLogin=true;
   const {user}=useSelector((state)=>state)
-  async function loginUpdate(){
-    try{
-      const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
+  // async function loginUpdate(){
+  //   try{
+  //     const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
+  //     dispatch(log(true));
+  //     isLogin=true;
+  //   }catch(error){
+  //     console.log(error)
+  //     dispatch(log(false));
+  //     isLogin=false;
+  //   }
+  // }
+  // useEffect(() => {
+  //   loginUpdate();
+  // }, [Cookies.get('token')]); 
+  async function loginUpdate() {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/v1/auth`, { withCredentials: true });
       dispatch(log(true));
-      isLogin=true;
-    }catch(error){
-      console.log(error)
+      isLogin = true;
+    } catch (error) {
+      console.log(error);
       dispatch(log(false));
-      isLogin=false;
+      isLogin = false;
     }
   }
+
   useEffect(() => {
-    loginUpdate();
-  }, [Cookies.get('token')]); 
+    const intervalId = setInterval(() => {
+      if (Cookies.get('token')) {
+        loginUpdate();
+      } else {
+        dispatch(log(false));
+        isLogin = false;
+      }
+    }, 1000); // Check every 1 second
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []); // Dependency array ensures this effect runs once on mount
+
     const fetchData=async()=>{
       try{
           const response=await axios.get(`${BASE_URL}/api/v1/fetch-note`,
@@ -66,5 +91,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
