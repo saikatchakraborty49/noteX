@@ -93,7 +93,7 @@ exports.logOut=async (req,res) => {
         path: '/',
         expires: new Date(0)
     });
-    await req.user.save();
+    // await req.user.save();
     res.status(200).json({ 
         success:true,
         message:"Logged out successfully" 
