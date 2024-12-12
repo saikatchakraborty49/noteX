@@ -9,7 +9,7 @@ const user = require("./routes/user");
 
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:3001',
+    origin: 'https://note-x-pi.vercel.app/',
     credentials: true
   }));
 
