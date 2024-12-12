@@ -90,7 +90,8 @@ exports.logOut=async (req,res) => {
         httpOnly: true, // Helps prevent XSS attacks
         secure: true,  // Set to true for HTTPS
         sameSite: 'None', // Allow cross-origin cookies
-        path: '/'
+        path: '/',
+        expires: new Date(0)
     });
     res.status(200).json({ 
         success:true,
