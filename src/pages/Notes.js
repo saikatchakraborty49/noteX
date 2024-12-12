@@ -12,7 +12,6 @@ const Notes = () => {
     const dispatch=useDispatch();
     const {user}=useSelector((state)=>state);
     const note=user.notes||[];
-    console.log(user);
     const BASE_URL='https://notex-backend-k1fy.onrender.com';
 
 

@@ -49,18 +49,13 @@ function App() {
   }
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
       if (Cookies.get('token')) {
         loginUpdate();
       } else {
         dispatch(log(false));
         isLogin = false;
       }
-    }, 1000); // Check every 1 second
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, []); // Dependency array ensures this effect runs once on mount
-
+    }, []);
     const fetchData=async()=>{
       try{
           const response=await axios.get(`${BASE_URL}/api/v1/fetch-note`,
