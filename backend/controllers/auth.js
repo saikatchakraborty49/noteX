@@ -91,7 +91,7 @@ exports.logOut=async (req,res) => {
         secure: true,  // Set to true for HTTPS
         sameSite: 'None', // Allow cross-origin cookies
         path: '/',
-        expires: new Date(0)
+        domain:'notex-backend-k1fy.onrender.com'
     });
     // await req.user.save();
     res.status(200).json({ 
