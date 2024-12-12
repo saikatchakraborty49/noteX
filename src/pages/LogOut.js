@@ -17,7 +17,8 @@ const LogOut = () => {
       dispatch(log(false));
       toast.success("Logged Out successfully");
     } catch (error) {
-      console.log(error.response?.data.message);
+      console.log(error.response?.data.message);     
+      console.log(error);
       toast.error('Error in Logging out')
     }
     

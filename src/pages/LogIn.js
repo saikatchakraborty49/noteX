@@ -83,9 +83,7 @@ const LogIn = () => {
             toast.success(response.data.message || "Login successful!");
             dispatch(log(true));
         } catch (error) {
-            toast.error(error|| "Login failed!");
-            console.log(error.response?.data?.message );
-            console.log(error);
+            toast.error(error.response?.data?.message || "Login failed!");
         }
     };
 
