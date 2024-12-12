@@ -12,8 +12,7 @@ app.use(cookieParser());
 //     origin: 'https://note-x-pi.vercel.app/',
 //     credentials: true
 //   }));
-const allowedOrigins = ["https://note-x-pi.vercel.app"]; // Add more origins if needed
-
+const allowedOrigins = ["https://note-x-pi.vercel.app","https://note-x-saikat-chakrabortys-projects.vercel.app/"]; // Add more origins if needed
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {

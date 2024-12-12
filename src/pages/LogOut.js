@@ -12,12 +12,12 @@ const LogOut = () => {
   async function logOutHandler(event) {
     try {
       event.preventDefault();
-    const respose=await axios.post(`${BASE_URL}/api/v1/log-out`,
+    const response=await axios.post(`${BASE_URL}/api/v1/log-out`,
       {withCredentials: true,});
-      toast.success("Logged Out successfully");
       dispatch(log(false));
+      toast.success("Logged Out successfully");
     } catch (error) {
-      console.log(error);
+      console.log(error.response?.data.message);
       toast.error('Error in Logging out')
     }
     
