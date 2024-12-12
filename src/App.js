@@ -54,7 +54,8 @@ function App() {
         dispatch(log(false));
         isLogin = false;
       }
-    }, []);
+      console.log("Is Login?"+isLogin);
+    }, [Cookies.get('token')]);
     const fetchData=async()=>{
       try{
           const response=await axios.get(`${BASE_URL}/api/v1/fetch-note`,
