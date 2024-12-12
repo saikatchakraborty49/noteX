@@ -19,43 +19,58 @@ import LogOut from './pages/LogOut';
 function App() { 
   const BASE_URL='https://notex-backend-k1fy.onrender.com';
   const dispatch=useDispatch();
-  let isLogin=useSelector((state)=>state.login.isLogin);
-  // let isLogin=true;
-  const {user}=useSelector((state)=>state)
-  // async function loginUpdate(){
-  //   try{
-  //     const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
-  //     dispatch(log(true));
-  //     isLogin=true;
-  //   }catch(error){
-  //     console.log(error)
-  //     dispatch(log(false));
-  //     isLogin=false;
-  //   }
-  // }
-  // useEffect(() => {
-  //   loginUpdate();
-  // }, [Cookies.get('token')]); 
-  async function loginUpdate() {
-    try {
-      const response = await axios.get(`${BASE_URL}/api/v1/auth`, { withCredentials: true });
+  let isLogin;
+  async function loginUpdate(){
+    try{
+      const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
       dispatch(log(true));
-      isLogin = true;
-    } catch (error) {
+      isLogin=true;
+    }catch(error){
+      console.log(error)
       dispatch(log(false));
-      isLogin = false;
+      isLogin=false;
     }
   }
-
   useEffect(() => {
-      if (Cookies.get('token')) {
-        loginUpdate();
-      } else {
-        dispatch(log(false));
-        isLogin = false;
-      }
-      console.log("Is Login?"+isLogin);
-    }, [Cookies.get('token')]);
+    loginUpdate();
+  }, [Cookies.get('token')]); 
+  isLogin=useSelector((state)=>state.login.isLogin);
+  // let isLogin=true;
+  const {user}=useSelector((state)=>state)
+  async function loginUpdate(){
+    try{
+      const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
+      dispatch(log(true));
+      isLogin=true;
+    }catch(error){
+      console.log(error)
+      dispatch(log(false));
+      isLogin=false;
+    }
+  }
+  useEffect(() => {
+    loginUpdate();
+  }, [Cookies.get('token')]); 
+  // async function loginUpdate() {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/api/v1/auth`, { withCredentials: true });
+  //     dispatch(log(true));
+  //     isLogin = true;
+  //   } catch (error) {
+  //     dispatch(log(false));
+  //     isLogin = false;
+  //   }
+  // }
+
+  // useEffect(() => {
+  //     if (Cookies.get('token')) {
+  //       loginUpdate();
+  //     } else {
+  //       dispatch(log(false));
+  //       isLogin = false;
+  //     }
+  //     console.log("Is Login?"+isLogin);
+  //   }, []);
     const fetchData=async()=>{
       try{
           const response=await axios.get(`${BASE_URL}/api/v1/fetch-note`,
