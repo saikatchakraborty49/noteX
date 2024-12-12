@@ -77,7 +77,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
-    const BASE_URL='https://notex-backend-0j9r.onrender.com/';
+    const BASE_URL='https://notex-backend-0j9r.onrender.com';
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",

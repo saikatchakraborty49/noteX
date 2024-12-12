@@ -12,7 +12,7 @@ import axios from 'axios';
 const NewNote = () => {
   const dispatch=useDispatch();
   const {user}=useSelector((state)=>state);
-  const BASE_URL='https://notex-backend-0j9r.onrender.com/';
+  const BASE_URL='https://notex-backend-0j9r.onrender.com';
   
 
   const [formData,setFormData]=useState({name:"",content:"",})

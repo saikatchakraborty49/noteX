@@ -17,7 +17,7 @@ import { useLocation } from 'react-router-dom';
 import LogOut from './pages/LogOut';
 
 function App() { 
-  const BASE_URL=process.env.BASE_URL;
+  const BASE_URL='https://notex-backend-0j9r.onrender.com';
   const dispatch=useDispatch();
   let isLogin=useSelector((state)=>state.login.isLogin);
   // let isLogin=true;
