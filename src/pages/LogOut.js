@@ -5,7 +5,7 @@ import { log } from '../features/counter/logInSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const LogOut = () => {
-  const BASE_URL='https://notex-backend-0j9r.onrender.com';
+  const BASE_URL='https://notex-backend-k1fy.onrender.com';
 
   const dispatch=useDispatch();
   let isLogin=useSelector((state)=>state.login.isLogin);
