@@ -20,37 +20,42 @@ function App() {
   const BASE_URL='https://notex-backend-k1fy.onrender.com';
   const dispatch=useDispatch();
   let isLogin;
-  async function loginUpdate(){
-    try{
-      const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
-      dispatch(log(true));
-      isLogin=true;
-    }catch(error){
-      console.log(error)
-      dispatch(log(false));
-      isLogin=false;
-    }
-  }
-  useEffect(() => {
-    loginUpdate();
-  }, [Cookies.get('token')]); 
+  // async function loginUpdate(){
+  //   try{
+  //     const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
+  //     dispatch(log(true));
+  //     isLogin=true;
+  //   }catch(error){
+  //     console.log(error)
+  //     dispatch(log(false));
+  //     isLogin=false;
+  //   }
+  // }
+  // useEffect(() => {
+  //   loginUpdate();
+  // }, [Cookies.get('token')]); 
+  // async
+  // useEffect(() => {
+  //   seeLogin();
+  // }, [])
+  
   isLogin=useSelector((state)=>state.login.isLogin);
   // let isLogin=true;
   const {user}=useSelector((state)=>state)
-  async function loginUpdate(){
-    try{
-      const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
-      dispatch(log(true));
-      isLogin=true;
-    }catch(error){
-      console.log(error)
-      dispatch(log(false));
-      isLogin=false;
-    }
-  }
-  useEffect(() => {
-    loginUpdate();
-  }, [Cookies.get('token')]); 
+  // async function loginUpdate(){
+  //   try{
+  //     const response=await axios.get(`${BASE_URL}/api/v1/auth`,{withCredentials: true,})
+  //     dispatch(log(true));
+  //     isLogin=true;
+  //   }catch(error){
+  //     console.log(error)
+  //     dispatch(log(false));
+  //     isLogin=false;
+  //   }
+  // }
+  // useEffect(() => {
+  //   loginUpdate();
+  // }, [Cookies.get('token')]); 
   // async function loginUpdate() {
   //   try {
   //     const response = await axios.get(`${BASE_URL}/api/v1/auth`, { withCredentials: true });
