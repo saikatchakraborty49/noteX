@@ -8,11 +8,12 @@ const cookieParser = require('cookie-parser');
 const user = require("./routes/user");
 
 app.use(cookieParser());
-// app.use(cors({
-//     origin: 'https://note-x-pi.vercel.app/',
-//     credentials: true
-//   }));
-const allowedOrigins = ["https://note-x-pi.vercel.app"]; // Add more origins if needed
+app.use(cors({
+    // origin: 'https://note-x-pi.vercel.app/',
+    origin:"*",
+    credentials: true
+  }));
+// const allowedOrigins = ["https://note-x-pi.vercel.app"]; // Add more origins if needed
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
