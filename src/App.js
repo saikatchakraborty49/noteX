@@ -84,7 +84,7 @@ function App() {
         fetchData();
     }, [useLocation().pathname,user]); 
   return (
-    <div className="bg-[url('./image/notepad-3297994_1280.jpg')] bg-cover w-screen h-screen App flex justify-center flex-col items-center gap-4">
+    <div className="bg-[url('./image/notepad-3297994_1280.jpg')] bg-cover min-w-screen min-h-screen App flex justify-center flex-col items-center gap-4">
       <NavLink to='/'><img className='w-[140px]' src={logo}/></NavLink>
       <div className='p-4 rounded-lg bg-slate-400/[.6] w-[430px]'>
         {isLogin?
