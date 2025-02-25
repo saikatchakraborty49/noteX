@@ -1,5 +1,3 @@
-//manage the pages properly
-
 import './App.css';
 import Navbar from './components/Navbar';
 import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
