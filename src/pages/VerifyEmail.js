@@ -42,7 +42,7 @@ const VerifyEmail = () => {
 
   return (
     <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[430px]">
-    <form onSubmit={handleSubmit}>
+    <form className='mt-2 flex flex-col justify-center items-center' onSubmit={handleSubmit}>
 
     <OtpInput
   value={otp}
@@ -50,22 +50,24 @@ const VerifyEmail = () => {
   numInputs={6}
   renderSeparator={<span>-</span>}
   renderInput={(props) => (
-    <input
-      {...props}
-      placeholder="-"
-      type="tel" // Restricts to numbers on mobile
-      inputMode="numeric" // Opens numeric keypad
-      pattern="[0-9]*" // Allows only numbers
-      className="w-[64px] lg:w-[80px] h-[32px] lg:h-[40px] p-1 border-0 bg-black text-yellow-200 rounded-full text-center text-2xl"
+      <input
+        {...props}
+        placeholder="-"
+        type="tel" // Restricts to numbers on mobile
+        inputMode="numeric" // Opens numeric keypad
+        pattern="[0-9]*" // Allows only numbers
+        className="w-[64px] lg:w-[80px] h-[32px] lg:h-[40px] p-1 border-0 bg-black text-yellow-200 rounded-full text-center text-2xl"
+      />
+      )}
     />
-  )}
-/>
 
-      <button type='submit'>
+      <button 
+      className='bg-black p-2 mt-3 mb-2 mx-2 rounded-md hover:scale-105'
+      type='submit'>
         Submit
       </button>
     </form>
-    </div>
+    </div> 
   );
 }
 
