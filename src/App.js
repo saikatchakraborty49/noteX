@@ -27,25 +27,19 @@ function App() {
   
   const {user}=useSelector((state)=>state)
 
-  //fetch all notes of user
-    // const fetchData=async()=>{
-    //   try{
-    //       const response=await axios.get(`${BASE_URL}/api/v1/fetch-note`,
-    //       {withCredentials: true,});
-    //       dispatch(update(response.data.data));
-    //   }catch(error){
-    //       console.error(error.response?.data?.message)
-    //   }
-    // }
-    // useEffect(() => {
-    //     fetchData();
-    // }, [useLocation().pathname,user]); 
-
-    // useEffect(() => {
-    //   if(!token){
-    //     navigate('/log-in')
-    //   }
-    // }, [third])
+  // fetch all notes of user
+    const fetchData=async()=>{
+      try{
+          const response = await apiConnector("GET", `${BASE_URL}/api/v1/fetch-note`)
+          
+          dispatch(update(response.data.data));
+      }catch(error){
+          console.error(error.response?.data?.message)
+      }
+    }
+    useEffect(() => {
+        fetchData();
+    }, [useLocation().pathname,user]); 
     
     
   return (
