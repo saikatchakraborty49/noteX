@@ -81,9 +81,9 @@ exports.logIn=async (req,res)=>{
             // existing.token=token;
             res.cookie('token',token,{
                 httpOnly: true, // Helps prevent XSS attacks
-                secure: false,  // Set to true for HTTPS
+                secure: true,  // Set to true for HTTPS
                 token,
-                // sameSite: 'None', // Allow cross-origin cookies
+                sameSite: 'None', // Allow cross-origin cookies
                 expires: new Date( Date.now() + 3 * 24 * 60 * 60 * 1000)
             }).status(200).json({
                 success:true,
