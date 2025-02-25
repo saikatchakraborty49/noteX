@@ -5,15 +5,16 @@ import {add,remove} from '../features/counter/noteSlice'
 import {update} from '../features/counter/userSlice'
 import toast from 'react-hot-toast';
 import axios from 'axios';
-// import dotenv from 'dotenv';
-// dotenv.config();
+import {apiConnector} from '../services/apiConnector'
+
 
 
 const NewNote = () => {
   const dispatch=useDispatch();
   const {user}=useSelector((state)=>state);
-  const BASE_URL='https://notex-backend-k1fy.onrender.com';
-  
+  // const BASE_URL='https://notex-backend-k1fy.onrender.com';
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
+ const {token}=useSelector((state)=>state.user)
 
   const [formData,setFormData]=useState({name:"",content:"",})
     function changeHandler(event) {
@@ -33,8 +34,13 @@ const NewNote = () => {
       else{
         event.preventDefault();
         try{
-          const response=await axios.post(`${BASE_URL}/api/v1/add-note`, formData,
-            {withCredentials: true,});
+          const {name,content}=formData;
+          const response = await apiConnector("POST", `${BASE_URL}/api/v1/add-note`,{
+            name,
+            content,
+            // token
+            
+          })
           toast.success(response.data.message || 'Note added successfully');
           // console.log(response);
           const userProfile=response.data.data;

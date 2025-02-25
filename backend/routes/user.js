@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 
-const {signUp,logIn,logOut}=require('../controllers/auth');
+const {signUp,logIn,logOut, sendotp}=require('../controllers/auth');
 const {addNote}=require('../controllers/addNote');
 const {deleteNote}=require('../controllers/deleteNote');
 const {auth}=require('../middleware/auth');
@@ -10,6 +10,7 @@ const { noteController } = require('../controllers/noteController');
 router.post('/sign-up',signUp);
 router.post('/log-in',logIn);
 router.post('/log-out',logOut);
+router.post('/send-otp',sendotp)
 
 router.post('/add-note',auth,addNote);
 router.post('/delete-note',auth,deleteNote);

@@ -1,83 +1,18 @@
-// import React, { useState } from "react";
-// import axios from "axios";
-// import toast from "react-hot-toast";
-// // import dotenv from 'dotenv';
-// // dotenv.config();
-
-// const SignUp = () => {
-//     // const BASE_URL=process.env.BASE_URL;
-//     const BASE_URL='http://localhost:3000';
-//     const [formData, setFormData] = useState({
-//         firstName: "",
-//         lastName: "",
-//         email: "",
-//         password: "",
-//     });
-
-//     const handleChange = (event) => {
-//         setFormData({ ...formData, [event.target.name]: event.target.value });
-//     };
-
-//     const handleSubmit = async (event) => {
-//         event.preventDefault();
-//         try {
-//             const response = await axios.post(`${BASE_URL}/api/v1/sign-up`, formData,{
-//                 withCredentials: true,
-//               });
-//             toast.success(response.data.message || "Signup successful!");
-//         } catch (error) {
-//             toast.error(error.response?.data?.message || "Signup failed!");
-//         }
-//     };
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <h2>Sign Up</h2>
-//             <input
-//                 type="text"
-//                 name="firstName"
-//                 placeholder="First Name"
-//                 value={formData.firstName}
-//                 onChange={handleChange}
-//                 required
-//             />
-//             <input
-//                 type="text"
-//                 name="lastName"
-//                 placeholder="Last Name"
-//                 value={formData.lastName}
-//                 onChange={handleChange}
-//                 required
-//             />
-//             <input
-//                 type="email"
-//                 name="email"
-//                 placeholder="Email"
-//                 value={formData.email}
-//                 onChange={handleChange}
-//                 required
-//             />
-//             <input
-//                 type="password"
-//                 name="password"
-//                 placeholder="Password"
-//                 value={formData.password}
-//                 onChange={handleChange}
-//                 required
-//             />
-//             <button type="submit">Sign Up</button>
-//         </form>
-//     );
-// };
-
-// export default SignUp;
-
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import {apiConnector} from '../services/apiConnector'
+import { useDispatch } from "react-redux";
+import {setSignUpData} from '../features/counter/userSlice'
 
 const SignUp = () => {
-    const BASE_URL='https://notex-backend-k1fy.onrender.com';
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
+    // const BASE_URL='https://notex-backend-k1fy.onrender.com';
+    const BASE_URL=process.env.REACT_APP_BASE_URL;
+
+    
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -97,17 +32,45 @@ const SignUp = () => {
                 toast.error("Password and Confirm password donot match")
                 return ;
             }
-            const response = await axios.post(`${BASE_URL}/api/v1/sign-up`, formData, {
-                withCredentials: true,
-            });
-            toast.success(response.data.message || "Signup successful!");
+            dispatch(setSignUpData(formData))
+            //verify otp
+            try {
+                const email=formData.email
+                const response = await apiConnector("POST", `${BASE_URL}/api/v1/send-otp`, {
+                  email,
+                //   checkUserPresent: true,
+                })
+                console.log("SENDOTP API RESPONSE............", response)
+          
+                console.log(response.data.success)
+          
+                if (!response.data.success) {
+                  throw new Error(response.data.message)
+                }
+          
+                toast.success("OTP Sent Successfully")
+                navigate("/verify-email")
+              } catch (error) {
+                console.log("SENDOTP API ERROR............", error)
+                // toast.error("Could Not Send OTP")
+                // console.log(error);
+                toast.error(error.response.data.message)
+              }
+
+
+            // const response = await axios.post(`${BASE_URL}/api/v1/sign-up`, formData, {
+            //     withCredentials: true,
+            // });
+            // toast.success(response.data.message || "Signup successful!");
+
         } catch (error) {
+            console.log(error);
             toast.error(error.response?.data?.message || "Signup failed!");
         }
     };
 
     return (
-        <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1">
+        <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[430px]">
             <form
                 onSubmit={handleSubmit}
                 className="p-6 rounded shadow-md w-full max-w-sm"

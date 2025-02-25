@@ -3,18 +3,23 @@ import axios from 'axios'
 import toast from 'react-hot-toast';
 import { log } from '../features/counter/logInSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import {apiConnector} from '../services/apiConnector'
+import { setToken } from '../features/counter/userSlice';
+
 
 const LogOut = () => {
-  const BASE_URL='https://notex-backend-k1fy.onrender.com';
+  // const BASE_URL='https://notex-backend-k1fy.onrender.com';
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
 
   const dispatch=useDispatch();
   let isLogin=useSelector((state)=>state.login.isLogin);
   async function logOutHandler(event) {
     try {
       event.preventDefault();
-    const response=await axios.post(`${BASE_URL}/api/v1/log-out`,
-      {withCredentials: true,});
-      dispatch(log(false));
+      const response = await apiConnector("POST", `${BASE_URL}/api/v1/log-out`)
+      // dispatch(log(false));
+      dispatch(setToken(null));
+      localStorage.removeItem("token")
       toast.success("Logged Out successfully");
     } catch (error) {
       console.log(error.response?.data.message);     

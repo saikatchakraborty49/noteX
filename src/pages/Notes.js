@@ -12,8 +12,8 @@ const Notes = () => {
     const dispatch=useDispatch();
     const {user}=useSelector((state)=>state);
     const note=user.notes||[];
-    const BASE_URL='https://notex-backend-k1fy.onrender.com';
-
+    // const BASE_URL='https://notex-backend-k1fy.onrender.com';
+    const BASE_URL=process.env.REACT_APP_BASE_URL;
 
     return(
         note.length===0?<div className='bg-black/[.6] rounded-b-lg text-white p-1 text-center'>No Note added</div>:

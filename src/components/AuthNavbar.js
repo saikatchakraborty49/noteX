@@ -1,23 +1,43 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import SignUp from '../pages/SignUp'
-import LogIn from '../pages/LogIn'
+import React, { useEffect } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const AuthNavbar = () => {
-  const [isSignIn,setSignIn]=useState(true);
-  return (    
-  <div className='flex flex-col'>
-    <div className='flex'>
-      <button onClick={()=>{
-        setSignIn(false);
-      }} className={isSignIn?'w-1/2 bg-slate-600 text-white py-2 text-center rounded-tl-lg':'w-1/2 bg-orange-500 text-white rounded-tl-lg py-2 text-center'}>Sign UP</button>
-      <button onClick={()=>{
-        setSignIn(true);
-      }} className={isSignIn?'w-1/2 bg-orange-500 text-white rounded-tr-lg py-2 text-center':'w-1/2 bg-slate-600 text-white py-2 text-center rounded-tr-lg'}>Log In</button>
-    </div>
-    {isSignIn?<LogIn/>:<SignUp/>}
-  </div>
-    )
-}
+  const navigate=useNavigate();
+  const location=useLocation();
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/log-in"); // Redirect to log-in by default
+    }
+  }, [location, navigate]);
+  return (
+    <div className="flex flex-col">
+      <div className="flex">
+        {/* Sign Up Button */}
+        <NavLink
+          to="/sign-up"
+          className={({ isActive }) =>
+            `w-1/2 border-r-2 border-neutral-300 py-2 text-white text-center rounded-tl-lg ${
+              isActive ? 'bg-orange-500' : 'bg-slate-600'
+            }`
+          }
+        >
+          Sign Up
+        </NavLink>
 
-export default AuthNavbar
+        {/* Log In Button */}
+        <NavLink
+          to="/log-in"
+          className={({ isActive }) =>
+            `w-1/2 py-2 text-white text-center rounded-tr-lg ${
+              isActive ? 'bg-orange-500' : 'bg-slate-600'
+            }`
+          }
+        >
+          Log In
+        </NavLink>
+      </div>
+    </div>
+  );
+};
+
+export default AuthNavbar;
