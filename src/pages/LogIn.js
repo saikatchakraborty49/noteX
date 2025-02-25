@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {apiConnector} from '../services/apiConnector'
 import { setToken } from "../features/counter/userSlice";
 import { useNavigate } from "react-router-dom";
+import {setNotes} from "../features/counter/noteSlice"
 
 const LogIn = () => {
     // const BASE_URL = 'https://notex-backend-k1fy.onrender.com';
@@ -13,6 +14,7 @@ const LogIn = () => {
     const navigate=useNavigate();
 
     const dispatch = useDispatch();
+    // const selector=useSelector();
     const {token} = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         email: "",
@@ -28,7 +30,10 @@ const LogIn = () => {
         try {
             const response = await apiConnector("POST", `${BASE_URL}/api/v1/log-in`, formData)
             console.log(response);
+            const notes=response.data.existing.notes;
+            console.log(notes);
             dispatch(setToken(response.data.token));
+            // dispatch(setNotes(notes));
             localStorage.setItem("token", JSON.stringify(response.data.token))
             toast.success(response.data.message || "Login successful!");
             navigate('/')

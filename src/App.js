@@ -16,6 +16,8 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import LogOut from './pages/LogOut';
 import VerifyEmail from './pages/VerifyEmail';
+import { setNotes } from './features/counter/noteSlice';
+import { apiConnector } from './services/apiConnector';
 
 function App() { 
   // const BASE_URL='https://notex-backend-k1fy.onrender.com';
@@ -31,14 +33,16 @@ function App() {
     const fetchData=async()=>{
       try{
           const response = await apiConnector("GET", `${BASE_URL}/api/v1/fetch-note`)
-          
-          dispatch(update(response.data.data));
+          // console.log(response.data.data.notes);
+          dispatch(setNotes(response.data.data.notes));
       }catch(error){
           console.error(error.response?.data?.message)
       }
     }
     useEffect(() => {
+      if(token){
         fetchData();
+      }    
     }, [useLocation().pathname,user]); 
     
     

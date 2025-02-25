@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {add,remove} from '../features/counter/noteSlice'
+import {add,remove, setNotes} from '../features/counter/noteSlice'
 import {update} from '../features/counter/userSlice'
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -44,8 +44,8 @@ const NewNote = () => {
           toast.success(response.data.message || 'Note added successfully');
           // console.log(response);
           const userProfile=response.data.data;
-          console.log(userProfile);
-          dispatch(update(userProfile));
+          // console.log(userProfile);
+          dispatch(setNotes(userProfile.notes));
         }catch(error){
           toast.error(error.response?.data?.message || "Note was not added due to some error")
         }

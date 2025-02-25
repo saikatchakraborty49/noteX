@@ -7,9 +7,9 @@ export const userSlice = createSlice({
     signUpData:null
   },
   reducers: {
-    update:(state,action)=>{
-      Object.assign(state, action.payload);
-    },
+    // update:(state,action)=>{
+    //   Object.assign(state, action.payload);
+    // },
     setToken:(state,action)=>{
       state.token=action.payload;
     },

@@ -7,11 +7,11 @@ import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
+import {setNotes} from '../features/counter/noteSlice'
 
 const Notes = () => {   
     const dispatch=useDispatch();
-    const {user}=useSelector((state)=>state);
-    const note=user.notes||[];
+    const note=useSelector((state)=>state.note);
     // const BASE_URL='https://notex-backend-k1fy.onrender.com';
     const BASE_URL=process.env.REACT_APP_BASE_URL;
 
@@ -34,7 +34,8 @@ const Notes = () => {
                                 const response=await axios.delete(`${BASE_URL}/api/v1/delete-note/${id}`,{
                                     withCredentials: true,
                                   });
-                                dispatch(update(response));
+                                //   console.log(response);
+                                dispatch(setNotes(response.data.data.notes));
                                 toast.success("Note removed");
                             }catch(error){
                                 toast.error(error.response?.data?.message)
