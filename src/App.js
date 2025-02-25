@@ -51,7 +51,7 @@ function App() {
   return (
     <div className="bg-[url('./image/notepad-3297994_1280.jpg')] bg-cover min-w-screen min-h-screen App flex justify-center flex-col items-center ">
       <NavLink to='/'><img className='w-[140px]' src={logo}/></NavLink>
-      <div className='p-4 rounded-t-lg bg-slate-400/[.6] w-[430px]'>
+      <div className='p-4 rounded-t-lg bg-slate-400/[.6] w-[300px] md:w-[430px]'>
         {token?
         <>
           <Navbar/>

@@ -70,7 +70,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[430px]">
+        <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[300px] md:w-[430px]">
             <form
                 onSubmit={handleSubmit}
                 className="p-6 rounded shadow-md w-full max-w-sm"

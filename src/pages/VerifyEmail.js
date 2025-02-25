@@ -41,7 +41,7 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[430px]">
+    <div className="flex justify-center items-center bg-black/[.6] rounded-b-lg text-white p-1 w-[300px] md:w-[430px]">
     <form className='mt-2 flex flex-col justify-center items-center' onSubmit={handleSubmit}>
 
     <OtpInput
