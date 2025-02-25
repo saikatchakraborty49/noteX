@@ -29,9 +29,9 @@ const LogIn = () => {
         event.preventDefault();
         try {
             const response = await apiConnector("POST", `${BASE_URL}/api/v1/log-in`, formData)
-            console.log(response);
+            // console.log(response);
             const notes=response.data.existing.notes;
-            console.log(notes);
+            // console.log(notes);
             dispatch(setToken(response.data.token));
             // dispatch(setNotes(notes));
             localStorage.setItem("token", JSON.stringify(response.data.token))
